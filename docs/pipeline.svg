@@ -1,39 +1,66 @@
-<svg width="1200" height="360" viewBox="0 0 1200 360" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+<svg width="1200" height="430" viewBox="0 0 1200 430" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
   <title id="title">Bayesian heading observer pipeline</title>
-  <desc id="desc">Optic flow input goes through sensory encoding, Bayesian inference, perception-action mapping, and behavioral predictions.</desc>
-  <rect width="1200" height="360" rx="24" fill="#f8fafc"/>
-  <rect x="1" y="1" width="1198" height="358" rx="23" stroke="#cbd5e1" stroke-width="2"/>
+  <desc id="desc">The model separates optic-flow encoding, Bayesian perceptual inference, and linear perception-action response mapping.</desc>
+  <rect width="1200" height="430" rx="24" fill="#f8fafc"/>
+  <rect x="1" y="1" width="1198" height="428" rx="23" stroke="#cbd5e1" stroke-width="2"/>
   <defs>
     <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
       <path d="M2 2 L10 6 L2 10" stroke="#334155" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
     </marker>
   </defs>
   <g font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif">
-    <text x="60" y="58" fill="#0f172a" font-size="30" font-weight="760">Bayesian observer model for heading perception from optic flow</text>
-    <text x="60" y="92" fill="#475569" font-size="18">Decompose human heading bias into sensory uncertainty, prior integration, and perception-to-action mapping.</text>
+    <text x="60" y="58" fill="#0f172a" font-size="30" font-weight="760">Bayesian heading observer: perceptual inference vs. action mapping</text>
+    <text x="60" y="92" fill="#475569" font-size="18">The key separation is the internal heading estimate and the final reported heading.</text>
     <g>
-      <rect x="62" y="142" width="190" height="105" rx="16" fill="#dbeafe" stroke="#93c5fd"/>
-      <text x="86" y="184" fill="#0f172a" font-size="21" font-weight="720">Optic flow</text>
-      <text x="86" y="216" fill="#334155" font-size="15">self-motion heading cues</text>
+      <rect x="54" y="145" width="180" height="104" rx="16" fill="#dbeafe" stroke="#93c5fd"/>
+      <text x="76" y="184" fill="#0f172a" font-size="21" font-weight="720">Optic flow</text>
+      <text x="76" y="215" fill="#334155" font-size="15">heading cues</text>
     </g>
-    <path d="M270 194 H350" stroke="#334155" stroke-width="2.4" marker-end="url(#arrow)"/>
+    <path d="M246 197 H286" stroke="#334155" stroke-width="2.4" marker-end="url(#arrow)"/>
+    <polygon points="286,197 274,190 274,204" fill="#334155"/>
     <g>
-      <rect x="370" y="142" width="205" height="105" rx="16" fill="#ecfeff" stroke="#67e8f9"/>
-      <text x="394" y="184" fill="#0f172a" font-size="21" font-weight="720">Efficient encoding</text>
-      <text x="394" y="216" fill="#334155" font-size="15">prior-weighted sensory noise</text>
+      <rect x="306" y="145" width="190" height="104" rx="16" fill="#ecfeff" stroke="#67e8f9"/>
+      <text x="328" y="184" fill="#0f172a" font-size="21" font-weight="720">Sensory code</text>
+      <text x="328" y="215" fill="#334155" font-size="15">noisy efficient code</text>
     </g>
-    <path d="M595 194 H675" stroke="#334155" stroke-width="2.4" marker-end="url(#arrow)"/>
+    <path d="M508 197 H548" stroke="#334155" stroke-width="2.4" marker-end="url(#arrow)"/>
+    <polygon points="548,197 536,190 536,204" fill="#334155"/>
     <g>
-      <rect x="695" y="142" width="205" height="105" rx="16" fill="#fef3c7" stroke="#facc15"/>
-      <text x="719" y="184" fill="#0f172a" font-size="21" font-weight="720">Bayesian inference</text>
-      <text x="719" y="216" fill="#334155" font-size="15">posterior mean and uncertainty</text>
+      <rect x="568" y="145" width="190" height="104" rx="16" fill="#fef3c7" stroke="#facc15"/>
+      <text x="590" y="184" fill="#0f172a" font-size="21" font-weight="720">Bayesian decode</text>
+      <text x="590" y="215" fill="#334155" font-size="15">posterior over heading</text>
     </g>
-    <path d="M920 194 H1000" stroke="#334155" stroke-width="2.4" marker-end="url(#arrow)"/>
+    <path d="M770 197 H816" stroke="#334155" stroke-width="2.4" marker-end="url(#arrow)"/>
+    <polygon points="816,197 804,190 804,204" fill="#334155"/>
     <g>
-      <rect x="1020" y="142" width="140" height="105" rx="16" fill="#fee2e2" stroke="#fca5a5"/>
-      <text x="1040" y="184" fill="#0f172a" font-size="21" font-weight="720">Action</text>
-      <text x="1040" y="216" fill="#334155" font-size="15">report bias</text>
+      <rect x="836" y="145" width="176" height="104" rx="16" fill="#dcfce7" stroke="#86efac"/>
+      <text x="862" y="184" fill="#0f172a" font-size="21" font-weight="720">Percept estimate</text>
+      <text x="862" y="215" fill="#334155" font-size="15">internal estimate</text>
     </g>
-    <text x="60" y="302" fill="#0f766e" font-size="18" font-weight="700">Output: predicted bias curves, response variability, and response-distribution heatmaps.</text>
+    <path d="M1024 197 H1044" stroke="#334155" stroke-width="2.4" marker-end="url(#arrow)"/>
+    <polygon points="1044,197 1032,190 1032,204" fill="#334155"/>
+    <g>
+      <rect x="1056" y="145" width="138" height="104" rx="16" fill="#fee2e2" stroke="#fca5a5"/>
+      <text x="1076" y="184" fill="#0f172a" font-size="21" font-weight="720">Report</text>
+      <text x="1076" y="215" fill="#334155" font-size="15">action bias</text>
+    </g>
+
+    <g>
+      <rect x="232" y="309" width="286" height="72" rx="14" fill="#f1f5f9" stroke="#cbd5e1"/>
+      <text x="254" y="339" fill="#0f172a" font-size="18" font-weight="720">History / previous headings</text>
+      <text x="254" y="363" fill="#475569" font-size="14">serial-dependence context</text>
+    </g>
+    <path d="M518 345 C588 345 604 285 626 257" stroke="#64748b" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+    <polygon points="626,257 612,260 621,270" fill="#64748b"/>
+
+    <g>
+      <rect x="780" y="309" width="330" height="72" rx="14" fill="#fff7ed" stroke="#fdba74"/>
+      <text x="802" y="339" fill="#0f172a" font-size="18" font-weight="720">Response-range mapping</text>
+      <text x="802" y="363" fill="#475569" font-size="14">reported heading = alpha_i * perceptual estimate</text>
+    </g>
+    <path d="M934 309 V263" stroke="#64748b" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+    <polygon points="934,263 927,276 941,276" fill="#64748b"/>
+
+    <text x="60" y="405" fill="#0f766e" font-size="18" font-weight="700">Outputs: bias curves, response variability, heatmaps, and fitted gains.</text>
   </g>
 </svg>
