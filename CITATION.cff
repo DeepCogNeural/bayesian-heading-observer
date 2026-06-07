@@ -1,0 +1,23 @@
+cff-version: 1.2.0
+message: "If you use this code, please cite the associated papers."
+authors:
+  - family-names: Xu
+    given-names: Linghao
+title: "Bayesian heading observer and perception-action bias code companion"
+version: 0.1.0
+date-released: 2026-06-07
+preferred-citation:
+  type: article
+  title: "A linear perception-action mapping accounts for response range-dependent biases in heading estimation from optic flow"
+  authors:
+    - family-names: Sun
+      given-names: Qichao
+    - family-names: Xu
+      given-names: Linghao
+    - family-names: Stocker
+      given-names: Alan A.
+  journal: "PLOS Computational Biology"
+  year: 2025
+  volume: 21
+  issue: 6
+  doi: 10.1371/journal.pcbi.1013147

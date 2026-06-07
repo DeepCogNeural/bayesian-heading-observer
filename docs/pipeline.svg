@@ -1,0 +1,39 @@
+<svg width="1200" height="360" viewBox="0 0 1200 360" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Bayesian heading observer pipeline</title>
+  <desc id="desc">Optic flow input goes through sensory encoding, Bayesian inference, perception-action mapping, and behavioral predictions.</desc>
+  <rect width="1200" height="360" rx="24" fill="#f8fafc"/>
+  <rect x="1" y="1" width="1198" height="358" rx="23" stroke="#cbd5e1" stroke-width="2"/>
+  <defs>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M2 2 L10 6 L2 10" stroke="#334155" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+  </defs>
+  <g font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif">
+    <text x="60" y="58" fill="#0f172a" font-size="30" font-weight="760">Bayesian observer model for heading perception from optic flow</text>
+    <text x="60" y="92" fill="#475569" font-size="18">Decompose human heading bias into sensory uncertainty, prior integration, and perception-to-action mapping.</text>
+    <g>
+      <rect x="62" y="142" width="190" height="105" rx="16" fill="#dbeafe" stroke="#93c5fd"/>
+      <text x="86" y="184" fill="#0f172a" font-size="21" font-weight="720">Optic flow</text>
+      <text x="86" y="216" fill="#334155" font-size="15">self-motion heading cues</text>
+    </g>
+    <path d="M270 194 H350" stroke="#334155" stroke-width="2.4" marker-end="url(#arrow)"/>
+    <g>
+      <rect x="370" y="142" width="205" height="105" rx="16" fill="#ecfeff" stroke="#67e8f9"/>
+      <text x="394" y="184" fill="#0f172a" font-size="21" font-weight="720">Efficient encoding</text>
+      <text x="394" y="216" fill="#334155" font-size="15">prior-weighted sensory noise</text>
+    </g>
+    <path d="M595 194 H675" stroke="#334155" stroke-width="2.4" marker-end="url(#arrow)"/>
+    <g>
+      <rect x="695" y="142" width="205" height="105" rx="16" fill="#fef3c7" stroke="#facc15"/>
+      <text x="719" y="184" fill="#0f172a" font-size="21" font-weight="720">Bayesian inference</text>
+      <text x="719" y="216" fill="#334155" font-size="15">posterior mean and uncertainty</text>
+    </g>
+    <path d="M920 194 H1000" stroke="#334155" stroke-width="2.4" marker-end="url(#arrow)"/>
+    <g>
+      <rect x="1020" y="142" width="140" height="105" rx="16" fill="#fee2e2" stroke="#fca5a5"/>
+      <text x="1040" y="184" fill="#0f172a" font-size="21" font-weight="720">Action</text>
+      <text x="1040" y="216" fill="#334155" font-size="15">report bias</text>
+    </g>
+    <text x="60" y="302" fill="#0f766e" font-size="18" font-weight="700">Output: predicted bias curves, response variability, and response-distribution heatmaps.</text>
+  </g>
+</svg>
