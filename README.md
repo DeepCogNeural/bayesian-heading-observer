@@ -2,34 +2,68 @@
 
 Code companion for Bayesian observer models of human heading perception from optic flow.
 
-This project studies how humans infer self-motion direction from noisy visual motion, and why the final reported action can be biased even when the internal perceptual estimate is close to statistically efficient.
+This repository packages a published vision-science modeling line in a readable form: how humans infer self-motion direction from noisy optic-flow input, why heading reports become systematically biased, and how to separate perceptual inference from the final perception-to-action report.
 
-## Why It Matters
+## 30-second overview
 
-For VR/XR navigation, user bias is not just "behavioral noise." A useful system needs to know where the bias enters:
+- **Question:** When a person navigates from optic flow, which part of the system creates heading bias: sensory uncertainty, Bayesian prior integration, memory from previous headings, or the final action/report stage?
+- **Model idea:** Build an efficient Bayesian observer for heading perception, then add a linear perception-action mapping so the internal perceptual estimate and the reported heading are not forced to be identical.
+- **VR/XR bridge:** The same decomposition is useful for VR/XR navigation because display, control, and interface systems need to know whether a user's error comes from perception, memory, or action mapping.
+- **Contribution:** The 2025 paper shows a response-range-dependent perception-action mapping; the 2022 paper shows attractive serial dependence at perceptual and postperceptual stages.
+- **Main outputs:** predicted bias curves, response-variability curves, posterior/response heatmaps, fitted action gains, sensory-noise estimates, and compact reproducible demo plots.
+- **Status:** public code companion. The demo uses synthetic data; subject-level participant files are not committed here.
 
-- sensory encoding of optic flow,
-- Bayesian prior integration,
-- memory and serial dependence,
-- or the final perception-to-action mapping.
+## Key paper figures
 
-This repository packages the modeling idea in a readable form, with a synthetic demo and the original MATLAB research scripts kept separate from subject-level data.
+The core result is not just curve fitting. The model separates a statistically grounded perceptual estimate from the reported action, then tests whether that separation explains human heading biases.
+
+### Efficient Bayesian observer plus response mapping
+
+![Extended efficient Bayesian observer model.](docs/figures/efficient-bayesian-observer-model.png)
+
+*Figure from Sun, Xu, and Stocker (2025), PLOS Computational Biology. The perceptual system first encodes optic-flow heading under uncertainty and decodes a Bayesian estimate. A separate response mapping transforms that internal estimate into a reported heading.*
+
+### Response-range-dependent bias explained by the model
+
+![Fit of the extended efficient Bayesian observer model.](docs/figures/response-range-model-fit.png)
+
+*Figure from Sun, Xu, and Stocker (2025). The fitted action gain changes with response range, and the model predicts both bias and response variability across participants.*
+
+### Serial dependence as a prior/history effect
+
+![Posterior distribution of heading direction predicted by the ideal observer model.](docs/figures/serial-dependence-posterior-model.png)
+
+*Figure from Xu, Sun, Zhang, and Li (2022), Journal of Vision. Previous headings can shift posterior distributions, which helps explain attractive serial dependence in optic-flow heading perception.*
+
+## Pipeline
 
 <p align="center">
   <img src="docs/pipeline.svg" alt="Bayesian heading observer pipeline" width="100%">
 </p>
 
-## Publications
+The corrected diagram keeps the main distinction explicit:
 
-**Co-first author:** Sun, Q.*, **Xu, L.H.***, Stocker, A.A. (2025). A linear perception-action mapping accounts for response range-dependent biases in heading estimation from optic flow. *PLOS Computational Biology*, 21(6), e1013147.  
-[Paper](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1013147)
+- optic-flow input is encoded under sensory uncertainty;
+- Bayesian decoding produces an internal perceptual estimate;
+- previous headings can act as history/context for serial dependence;
+- a response-range-dependent linear mapping turns the internal estimate into the reported heading.
 
-**First author:** Xu, L.H., Sun, Q., Zhang, B., Li, X. (2022). Attractive serial dependence in heading perception from optic flow occurs at the perceptual and postperceptual stages. *Journal of Vision*, 22(12), 11.  
-[Paper](https://pmc.ncbi.nlm.nih.gov/articles/PMC9652722/)
+## Repository structure
 
-## One-Command Demo
+| Path | Purpose |
+| --- | --- |
+| `src/bayesian_heading_observer/model.py` | Compact Python implementation for the synthetic Bayesian observer demo. |
+| `demo/run_demo.py` | One-command entry point that writes model-prediction and heatmap figures. |
+| `docs/pipeline.svg` | Corrected public-facing pipeline diagram. |
+| `docs/figures/` | Cropped key figures from the published papers, with citations in this README. |
+| `matlab/original/` | Original MATLAB research scripts without subject-level data files. |
+| `CITATION.cff` | Repository citation metadata. |
+
+## Quickstart
 
 ```bash
+python3 -m venv .venv
+source .venv/bin/activate
 python3 -m pip install -r requirements.txt
 python3 -m demo.run_demo
 ```
@@ -41,9 +75,9 @@ outputs/model_prediction.png
 outputs/posterior_heatmap.png
 ```
 
-The demo uses synthetic data. It is designed for fast inspection of the model mechanics, not for reproducing paper figures from private participant files.
+The demo is designed for fast inspection of the model mechanics. It does not attempt to reproduce paper figures from participant-level files.
 
-## What The Demo Shows
+## What the demo shows
 
 The runnable Python demo implements a compact version of the observer logic:
 
@@ -54,18 +88,22 @@ The runnable Python demo implements a compact version of the observer logic:
 5. Apply a linear perception-to-action gain.
 6. Plot predicted response bias and response distributions.
 
-## Main Modules
+## Main modules
 
-| Path | Role |
-| --- | --- |
-| `src/bayesian_heading_observer/model.py` | Compact Python implementation for the synthetic demo |
-| `demo/run_demo.py` | One-command entry point |
-| `docs/pipeline.svg` | Project pipeline diagram |
-| `matlab/original/` | Original MATLAB research scripts without subject-level data |
+### Python demo
 
-## Original MATLAB Code
+`src/bayesian_heading_observer/model.py` contains the public synthetic implementation. It is intentionally small so readers can see the modeling chain directly:
 
-The original research code is preserved under `matlab/original/`.
+- prior construction on a circular heading axis;
+- sensory likelihood under noise;
+- posterior inference;
+- circular mean and variability summaries;
+- perception-action gain;
+- figure writing for the demo.
+
+### Original MATLAB research scripts
+
+The original MATLAB code is preserved under `matlab/original/`.
 
 Key routines:
 
@@ -75,18 +113,28 @@ Key routines:
 - `main_FitPrior.m`: prior fitting.
 - `plot_HeatMap.m`: response-distribution visualization.
 
-Subject-level `.mat` files are not included here. This keeps the public repository clean and prevents participant-level files or file-name identifiers from being exposed.
+Subject-level `.mat` files are intentionally not included.
 
-## Research Contribution
+## Expected outputs
 
-The core contribution is not just fitting a curve. The model separates:
+Depending on the path used, outputs include:
 
-- statistical inference from noisy optic-flow input,
-- efficient coding constraints,
-- response-range effects,
-- and the perception-to-action transformation that creates systematic report bias.
+- bias curves comparing actual and reported heading;
+- response-variability curves;
+- posterior or response-distribution heatmaps;
+- fitted perception-action gains;
+- fitted sensory-noise parameters;
+- MATLAB figures from the original research scripts when run in the original data environment.
 
-That decomposition is useful for perception science and for applied VR/XR systems where a human user must infer heading and act under uncertainty.
+Generated artifacts should go under `outputs/` or another ignored local directory.
+
+## Publications
+
+**Co-first author:** Sun, Q.*, **Xu, L.H.***, Stocker, A.A. (2025). A linear perception-action mapping accounts for response range-dependent biases in heading estimation from optic flow. *PLOS Computational Biology*, 21(6), e1013147.
+[Paper](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1013147) | [DOI](https://doi.org/10.1371/journal.pcbi.1013147)
+
+**First author:** Xu, L.H., Sun, Q., Zhang, B., Li, X. (2022). Attractive serial dependence in heading perception from optic flow occurs at the perceptual and postperceptual stages. *Journal of Vision*, 22(12), 11.
+[Paper](https://pmc.ncbi.nlm.nih.gov/articles/PMC9652722/) | [DOI](https://doi.org/10.1167/jov.22.12.11)
 
 ## Citation
 
@@ -109,10 +157,11 @@ That decomposition is useful for perception science and for applied VR/XR system
   volume = {22},
   number = {12},
   pages = {11},
-  year = {2022}
+  year = {2022},
+  doi = {10.1167/jov.22.12.11}
 }
 ```
 
-## Data Note
+## Data note
 
-This public repository intentionally uses a synthetic demo. The research papers describe the experimental data and modeling results; subject-level data files should be shared only through the appropriate data-release channel.
+This public repository intentionally uses a synthetic demo. The papers describe the experimental data and modeling results; participant-level data should be shared only through the appropriate release channel.
