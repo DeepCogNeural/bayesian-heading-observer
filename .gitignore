@@ -1,0 +1,12 @@
+.DS_Store
+__MACOSX/
+*.asv
+*.fig
+*.mat
+outputs/
+__pycache__/
+.pytest_cache/
+.venv/
+dist/
+build/
+*.egg-info/

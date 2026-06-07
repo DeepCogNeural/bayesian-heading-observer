@@ -1,0 +1,16 @@
+[project]
+name = "bayesian-heading-observer"
+version = "0.1.0"
+description = "Synthetic demo and research code notes for Bayesian observer models of heading perception from optic flow."
+requires-python = ">=3.10"
+dependencies = [
+  "numpy>=1.24",
+  "scipy>=1.10",
+  "matplotlib>=3.7",
+]
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
